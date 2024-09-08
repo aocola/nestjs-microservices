@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  redis:
+    image: 'redis:6.2'
+    container_name: redis
+    ports:
+      - '6379:6379'
+    networks:
+      - flights-network
+
+  ticket-service:
+    build:
+      context: "./ticket-service"
+      dockerfile: Dockerfile
+    container_name: ticket-service
+    ports:
+      - '3011:3011'
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      HTTP_PORT: 3011
+    networks:
+      - flights-network
+  user-service:
+    build:
+      context: "./user-service"
+      dockerfile: Dockerfile
+    container_name: user-service
+    ports:
+      - '3010:3010'
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      HTTP_PORT: 3010
+    networks:
+      - flights-network
+  flight-service:
+    build:
+      context: "./flight-service"
+      dockerfile: Dockerfile
+    container_name: flight-service
+    ports:
+      - '3013:3013'
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      HTTP_PORT: 3013
+    networks:
+      - flights-network
+  payment-service:
+    build:
+      context: "./payment-service"
+      dockerfile: Dockerfile
+    container_name: payment-service
+    ports:
+      - '3012:3012'
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      HTTP_PORT: 3012
+    networks:
+      - flights-network
+
+networks:
+  flights-network:
+    driver: bridge
