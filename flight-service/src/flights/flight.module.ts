@@ -16,6 +16,9 @@ import { AddFlightPassengersService } from './application/flight-case/add-flight
 import { MongoFlightRepository } from './infrastructure/repository/mongo-db/mongo-flight.repository';
 import { GenerateFlightController } from './infrastructure/controller/generate-flight.controller';
 import { CountFlightService } from './application/flight-case/count-flights.service';
+import { GetFlightDeparturesController } from './infrastructure/controller/get-departure-flight.controller';
+import { GetDepartureFlightsService } from './application/flight-case/get-departures-flights.service';
+
 
 
 @Module({
@@ -28,6 +31,7 @@ import { CountFlightService } from './application/flight-case/count-flights.serv
         GetFlightByIdController,
         GetFlightByDateController,
         GenerateFlightController,
+        GetFlightDeparturesController,
         AddFlightPassengersController
     ],
     providers: [
@@ -37,6 +41,7 @@ import { CountFlightService } from './application/flight-case/count-flights.serv
         AddFlightPassengersService,
         CountFlightService,
         GenerateFlightService,
+        GetDepartureFlightsService,
         MongoFlightRepository,
         GenerateFlightService,
         {

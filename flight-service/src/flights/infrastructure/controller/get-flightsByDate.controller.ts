@@ -12,7 +12,6 @@ export class GetFlightByDateController {
     @Query('startDate') startDate: string,
     @Query('endDate') endDate: string
   ) {
-    console.log("available",departureAirport,arrivalAirport,startDate,endDate);
     return this.flightService.execute(
       departureAirport,
       arrivalAirport,

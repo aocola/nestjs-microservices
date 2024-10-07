@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { CreateFlightDto } from '../dto/create-flight.dto';
 import { FlightRepository } from 'src/flights/domain/repository/flight.repository';
 import { CustomInjectable } from 'src/common/dependecy-injection/injectable';
+import { longRoutes, mediumRoutes, shortRoutes } from 'src/flights/domain/constants';
 
 @CustomInjectable()
 export class GenerateFlightService {
@@ -19,7 +20,7 @@ export class GenerateFlightService {
   ];
   // Generar vuelos
   execute(
-    airports: { airportCode: string }[],
+    airports: { airportCode: string, }[],
     n: number,
     m: number,
     months: number,
@@ -87,15 +88,7 @@ export class GenerateFlightService {
     const longFlightDuration = this.getRandomInt(7, 15); // Vuelos largos
 
     // Comparar pares de aeropuertos para asignar duración realista (simulado)
-    const shortRoutes = [
-      ['LIM', 'CUZ'], ['JFK', 'LHR'], ['CUZ', 'LIM']
-    ];
-    const mediumRoutes = [
-      ['LIM', 'JFK'], ['LHR', 'JFK'], ['CUZ', 'LHR']
-    ];
-    const longRoutes = [
-      ['LHR', 'LIM'], ['JFK', 'LIM'], ['CUZ', 'JFK']
-    ];
+    
 
     if (this.isRouteInList(departureAirport, arrivalAirport, shortRoutes)) {
       return shortFlightDuration;

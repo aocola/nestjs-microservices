@@ -1,3 +1,4 @@
+import { Departure, DepartureAttributes } from "../entities/departure.entity";
 import { Flight, FlightAttributes } from "../entities/flight.entity";
 
 export abstract class FlightRepository {
@@ -6,4 +7,6 @@ export abstract class FlightRepository {
     abstract addPassengers(id: string, amount:number): Promise<void>;
     abstract getFlightsByDate(departureAirport:string, arrivalAirport:string, startDate:Date, endDate:Date): Promise<Flight[]>;
     abstract getFlightCount(): Promise<number | null> ;
+    abstract getDepartureFlights():Promise<object[] | null>;
+
 }

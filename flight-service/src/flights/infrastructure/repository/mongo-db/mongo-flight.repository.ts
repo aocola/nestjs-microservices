@@ -4,11 +4,17 @@ import { CustomInjectable } from 'src/common/dependecy-injection/injectable';
 import { Flight } from './schema/flight.schema';
 import { FlightRepository } from 'src/flights/domain/repository/flight.repository';
 import { FlightAttributes, Flight as FlightEntity } from '../../../domain/entities/flight.entity';
+import { Departure, DepartureAttributes } from 'src/flights/domain/entities/departure.entity';
+import { airports, getAirportCodes } from 'src/flights/domain/constants';
 
 @CustomInjectable()
 export class MongoFlightRepository implements FlightRepository {
   constructor(
     @InjectModel(Flight.name) private flightModel: Model<Flight>) {}
+
+  async getDepartureFlights(): Promise<object[] | null> {
+    return airports;
+  }
 
   async getFlightsByDate(departureAirport: string, arrivalAirport: string, startDate: Date, endDate: Date): Promise<FlightEntity[]> {
     const documents = await this.flightModel.find({

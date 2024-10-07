@@ -1,6 +1,7 @@
 import * as moment from "moment";
 import { lastValueFrom } from "rxjs";
 import { CustomInjectable } from 'src/common/dependecy-injection/injectable';
+import { Departure, DepartureAttributes } from "src/flights/domain/entities/departure.entity";
 import { Flight, FlightAttributes } from 'src/flights/domain/entities/flight.entity';
 import { FlightRepository } from 'src/flights/domain/repository/flight.repository';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,6 +9,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 @CustomInjectable()
 export class InMemoryFlightRepository implements FlightRepository {
+  getDepartureFlights(): Promise<Departure[] | null> {
+    throw new Error("Method not implemented.");
+  }
   getFlightCount(): Promise<number | null> {
     throw new Error("Method not implemented.");
   }
