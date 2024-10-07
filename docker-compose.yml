@@ -8,7 +8,6 @@ services:
       - '6379:6379'
     networks:
       - flights-network
-
   ticket-service:
     build:
       context: "./ticket-service"
@@ -22,23 +21,6 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       HTTP_PORT: 3011
-      USERNAME: alvaroocola
-      PASSWORD: 4uiqvImCR0c5klZC
-    networks:
-      - flights-network
-  user-service:
-    build:
-      context: "./user-service"
-      dockerfile: Dockerfile
-    container_name: user-service
-    ports:
-      - '3010:3010'
-    depends_on:
-      - redis
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      HTTP_PORT: 3010
       USERNAME: alvaroocola
       PASSWORD: 4uiqvImCR0c5klZC
     networks:
@@ -77,7 +59,22 @@ services:
       PASSWORD: 4uiqvImCR0c5klZC
     networks:
       - flights-network
-
+  frontend:
+    build:
+      context: "./frontend"
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - ticket-service
+      - flight-service
+      - payment-service
+    networks:
+      - flights-network
+    environment:
+      NODE_ENV: production
+  
 networks:
   flights-network:
     driver: bridge
