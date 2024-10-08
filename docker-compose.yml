@@ -22,7 +22,7 @@ services:
       REDIS_PORT: 6379
       HTTP_PORT: 3011
       USERNAME: alvaroocola
-      PASSWORD: 4uiqvImCR0c5klZC
+      PASSWORD: 
     networks:
       - flights-network
   flight-service:
@@ -39,7 +39,7 @@ services:
       REDIS_PORT: 6379
       HTTP_PORT: 3013
       USERNAME: alvaroocola
-      PASSWORD: 4uiqvImCR0c5klZC
+      PASSWORD: 
     networks:
       - flights-network
   payment-service:
@@ -56,7 +56,7 @@ services:
       REDIS_PORT: 6379
       HTTP_PORT: 3012
       USERNAME: alvaroocola
-      PASSWORD: 4uiqvImCR0c5klZC
+      PASSWORD: 
     networks:
       - flights-network
   frontend:
